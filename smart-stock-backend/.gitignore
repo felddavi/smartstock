@@ -1,0 +1,41 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Variáveis de ambiente e segredos locais
+.env
+.env.local
+.env.*.local
+*.env
+application-local.properties
+application-local.yml
+
+# Logs
+logs/
+*.log
+
+# IDEs e Editores
+.idea/
+.vscode/
+*.iws
+*.iml
+*.ipr
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# Builds & Pacotes
+build/
+*.jar
+*.war
+!maven-wrapper.jar
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
