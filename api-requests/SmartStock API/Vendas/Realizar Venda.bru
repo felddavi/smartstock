@@ -1,0 +1,26 @@
+meta {
+  name: Realizar Venda
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/vendas
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "itens": [
+      {
+        "produtoId": 1,
+        "quantidade": 1
+      }
+    ]
+  }
+}

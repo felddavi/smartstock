@@ -1,0 +1,15 @@
+meta {
+  name: Atualizar Estoque Rápido
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:8080/api/produtos/1/estoque?quantidade=5
+  body: none
+  auth: none
+}
+
+params:query {
+  quantidade: 5
+}

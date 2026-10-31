@@ -1,0 +1,25 @@
+meta {
+  name: Cadastrar Produto
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/produtos
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Mouse Gamer Sem Fio",
+    "categoria": "Periféricos",
+    "preco": 149.90,
+    "quantidade": 25,
+    "estoqueMinimo": 5
+  }
+}

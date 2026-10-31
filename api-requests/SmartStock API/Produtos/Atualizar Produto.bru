@@ -1,0 +1,25 @@
+meta {
+  name: Atualizar Produto
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/api/produtos/1
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "nome": "Mouse Gamer Sem Fio RGB",
+    "categoria": "Periféricos",
+    "preco": 179.90,
+    "quantidade": 30,
+    "estoqueMinimo": 8
+  }
+}
