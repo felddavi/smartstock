@@ -1,6 +1,11 @@
 # 📦 Smart Stock
 
 [![Deploy na Vercel](https://img.shields.io/badge/Vercel-Deploy_Ativo-black?style=for-the-badge&logo=vercel)](https://smartstock-pdv.vercel.app/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot_4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![REST API](https://img.shields.io/badge/REST_API-OpenAPI_3-0052CC?style=for-the-badge&logo=fastapi&logoColor=white)](https://swagger.io/)
+[![Java](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Testes Automatizados](https://img.shields.io/badge/Testes-55_Passando-success?style=for-the-badge&logo=junit5)](https://github.com/)
 
 Sistema full-stack para **Gestão de Estoque e Frente de Caixa (PDV)** voltado ao varejo, com controle de saldo em tempo real, ajustes de inventário, alertas de ruptura e vendas atômicas com histórico auditável de movimentações.
 
