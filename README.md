@@ -23,15 +23,16 @@ A aplicação está disponível e hospedada publicamente:
 
 ## 🎬 Demonstração
 
-| Cadastro de produtos | Movimentação de estoque | Venda no PDV |
-| :---: | :---: | :---: |
-| ![Cadastro](docs/img/cadastro.gif) | ![Movimentação](docs/img/movimentacao.gif) | ![Venda](docs/img/venda.gif) |
+|                            Cadastro de produtos                            |                              Movimentação de estoque                              |                          Venda no PDV                           |
+| :------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------: |
+| <img src="docs/img/cadastro.gif" alt="Cadastro de produtos" width="280" /> | <img src="docs/img/movimentacao.gif" alt="Movimentação de estoque" width="280" /> | <img src="docs/img/venda.gif" alt="Venda no PDV" width="280" /> |
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
 ### Backend
+
 - **Linguagem & Framework:** Java 21 & Spring Boot 4.1.1
 - **Acesso a Dados:** Spring Data JPA & Hibernate
 - **Validação:** Jakarta Bean Validation (`@Valid`, constraints nos DTOs)
@@ -39,12 +40,14 @@ A aplicação está disponível e hospedada publicamente:
 - **Build & Dependências:** Apache Maven Wrapper (`mvnw`)
 
 ### Frontend
+
 - **Interface:** React 19
 - **Build Tool:** Vite
 - **Comunicação HTTP:** Axios
 - **Qualidade de Código:** Oxlint
 
 ### Banco de Dados
+
 - **Aplicação (desenvolvimento e deploy):** MySQL 8+
 - **Testes automatizados:** H2 em memória, isolado por perfil de teste
 
@@ -76,6 +79,7 @@ smartstock/
 ## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
+
 - **Java 21** instalado e configurado no `PATH`.
 - **Node.js 20+** e **npm** instalados.
 - **MySQL 8+** ativo localmente na porta padrão `3306`.
@@ -83,15 +87,18 @@ smartstock/
 ### 1. Backend (`smart-stock-backend`)
 
 #### Variáveis de ambiente
+
 O backend conecta-se ao MySQL usando `DB_USERNAME` e `DB_PASSWORD`.
 
 **Windows (PowerShell):**
+
 ```powershell
 $env:DB_USERNAME = "root"
 $env:DB_PASSWORD = "sua_senha_aqui"
 ```
 
 **Linux / macOS (Bash):**
+
 ```bash
 export DB_USERNAME="root"
 export DB_PASSWORD="sua_senha_aqui"
@@ -100,6 +107,7 @@ export DB_PASSWORD="sua_senha_aqui"
 > **Nota:** o banco `smartstock` é criado automaticamente caso não exista (`createDatabaseIfNotExist=true`).
 
 #### Executar
+
 ```bash
 cd smart-stock-backend
 # Windows:
@@ -110,6 +118,7 @@ cd smart-stock-backend
 ```
 
 A API estará em `http://localhost:8080`:
+
 - **Swagger UI:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 - **OpenAPI JSON:** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
@@ -124,6 +133,7 @@ npm run dev
 A aplicação abre em `http://localhost:5173`.
 
 #### Endereço da API
+
 Por padrão, o frontend consome a API em `http://localhost:8080`.
 Para apontar para outro endereço (por exemplo, o backend em produção), defina a variável
 `VITE_API_URL` antes de rodar ou gerar o build:
@@ -142,36 +152,36 @@ Documentação interativa completa em `/swagger-ui.html`. Resumo por recurso:
 <details open>
 <summary><strong>📦 Produtos</strong> — <code>/api/produtos</code></summary>
 
-| Método | Rota | Descrição |
-| :---: | :--- | :--- |
-| `GET` | `/api/produtos` | Lista todos os produtos |
-| `GET` | `/api/produtos/{id}` | Busca um produto pelo ID |
-| `POST` | `/api/produtos` | Cadastra um novo produto |
-| `PUT` | `/api/produtos/{id}` | Atualiza os dados de um produto |
-| `PATCH` | `/api/produtos/{id}/estoque` | Atualiza o saldo de estoque do produto |
-| `DELETE` | `/api/produtos/{id}` | Exclui um produto |
+|  Método  | Rota                         | Descrição                              |
+| :------: | :--------------------------- | :------------------------------------- |
+|  `GET`   | `/api/produtos`              | Lista todos os produtos                |
+|  `GET`   | `/api/produtos/{id}`         | Busca um produto pelo ID               |
+|  `POST`  | `/api/produtos`              | Cadastra um novo produto               |
+|  `PUT`   | `/api/produtos/{id}`         | Atualiza os dados de um produto        |
+| `PATCH`  | `/api/produtos/{id}/estoque` | Atualiza o saldo de estoque do produto |
+| `DELETE` | `/api/produtos/{id}`         | Exclui um produto                      |
 
 </details>
 
 <details open>
 <summary><strong>🔄 Movimentações</strong> — <code>/api/movimentacoes</code></summary>
 
-| Método | Rota | Descrição |
-| :---: | :--- | :--- |
-| `GET` | `/api/movimentacoes` | Lista o histórico de movimentações |
-| `POST` | `/api/movimentacoes` | Registra uma movimentação (entrada, saída, avaria, devolução, etc.) |
-| `GET` | `/api/movimentacoes/produto/{produtoId}` | Histórico de movimentações de um produto |
+| Método | Rota                                     | Descrição                                                           |
+| :----: | :--------------------------------------- | :------------------------------------------------------------------ |
+| `GET`  | `/api/movimentacoes`                     | Lista o histórico de movimentações                                  |
+| `POST` | `/api/movimentacoes`                     | Registra uma movimentação (entrada, saída, avaria, devolução, etc.) |
+| `GET`  | `/api/movimentacoes/produto/{produtoId}` | Histórico de movimentações de um produto                            |
 
 </details>
 
 <details open>
 <summary><strong>🛒 Vendas</strong> — <code>/api/vendas</code></summary>
 
-| Método | Rota | Descrição |
-| :---: | :--- | :--- |
-| `POST` | `/api/vendas` | Realiza uma venda atômica (valida itens, baixa estoque e gera movimentações) |
-| `GET` | `/api/vendas` | Lista todas as vendas |
-| `GET` | `/api/vendas/{id}` | Busca uma venda pelo ID, com seus itens |
+| Método | Rota               | Descrição                                                                    |
+| :----: | :----------------- | :--------------------------------------------------------------------------- |
+| `POST` | `/api/vendas`      | Realiza uma venda atômica (valida itens, baixa estoque e gera movimentações) |
+| `GET`  | `/api/vendas`      | Lista todas as vendas                                                        |
+| `GET`  | `/api/vendas/{id}` | Busca uma venda pelo ID, com seus itens                                      |
 
 </details>
 
@@ -180,7 +190,9 @@ Documentação interativa completa em `/swagger-ui.html`. Resumo por recurso:
 ## 🧪 Testes e Qualidade de Código
 
 ### Backend (55 Testes Automatizados)
+
 A suíte roda de forma autônoma e rápida com **H2 em memória**, sem precisar de MySQL:
+
 - **Testes unitários de Service (JUnit 5 + Mockito):** regras de negócio, bloqueios de estoque, cálculo de totais e integridade das movimentações.
 - **Testes de Controller (`@WebMvcTest`):** payloads, status HTTP (200, 201, 400, 404) e contratos REST.
 - **Testes de integração (`@SpringBootTest` com H2):** transações `@Transactional` e rollback atômico em operações compostas de venda.
@@ -191,6 +203,7 @@ cd smart-stock-backend
 ```
 
 ### Frontend (Lint & Build)
+
 ```bash
 cd smart-stock-frontend
 npm run lint
@@ -202,6 +215,7 @@ npm run build
 ## 📬 Testando a API via Bruno
 
 A coleção está em `api-requests/SmartStock API/`:
+
 1. Abra o [Bruno](https://www.usebruno.com) e escolha **Open Collection**.
 2. Selecione a pasta `api-requests/SmartStock API`.
 3. Use as pastas **Produtos**, **Movimentações** e **Vendas**.
@@ -211,6 +225,7 @@ A coleção está em `api-requests/SmartStock API/`:
 ## 🖥️ Módulos e Fluxo das Telas
 
 ### 📦 Tela 1: Painel de Estoque
+
 - **Alertas de Ruptura:** destaque automático quando há itens no limite ou abaixo do estoque mínimo.
 - **Busca e Filtro Rápido:** localiza produtos por nome ou categoria e isola itens críticos.
 - **Cadastro e Listagem:** visão tabular de preços, saldos, status e ações de manutenção.
@@ -218,6 +233,7 @@ A coleção está em `api-requests/SmartStock API/`:
 - **Ajuste de Inventário / Balanço:** conferência física que calcula a diferença contra o saldo do sistema e gera a movimentação compensatória.
 
 ### 🛒 Tela 2: Caixa / PDV
+
 - **Catálogo Rápido:** busca instantânea que lista apenas produtos disponíveis.
 - **Carrinho Reativo:** controle de quantidade (`+` e `−`), subtotal com arredondamento seguro em centavos e remoção de itens.
 - **Travas de Saldo na Interface:** o botão `+` trava quando a quantidade atinge o saldo físico.
@@ -227,7 +243,7 @@ A coleção está em `api-requests/SmartStock API/`:
 
 ## 🧭 Decisões de Arquitetura
 
-- **Venda em um único endpoint atômico:** O frontend envia o carrinho inteiro em uma requisição, e o backend valida todos os itens *antes* de alterar qualquer estado, dentro de uma transação. Assim, uma falha no meio nunca deixa o estoque baixado pela metade.
+- **Venda em um único endpoint atômico:** O frontend envia o carrinho inteiro em uma requisição, e o backend valida todos os itens _antes_ de alterar qualquer estado, dentro de uma transação. Assim, uma falha no meio nunca deixa o estoque baixado pela metade.
 - **Preço congelado no item da venda:** O valor unitário é copiado para o `ItemVenda` no momento da compra, garantindo que reajustes posteriores de preço no produto não alterem o histórico e balanço fiscal passado.
 - **Agrupamento de itens repetidos:** Se houver repetições de um mesmo produto no payload, as quantidades são consolidadas antes da validação de estoque, impedindo fraudes ou inconsistências de concorrência.
 - **Rastreabilidade total:** Toda alteração de saldo gera uma `Movimentacao`, garantindo auditoria completa (entradas, saídas, perdas e vendas).
