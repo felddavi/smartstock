@@ -11,6 +11,16 @@ Sistema full-stack para **Gestão de Estoque e Frente de Caixa (PDV)** voltado a
 
 ---
 
+## 🌐 Demonstração Online
+
+A aplicação está disponível e hospedada publicamente:
+
+- **Frontend (PDV & Gestão de Estoque):** [https://smartstock-pdv.vercel.app/](https://smartstock-pdv.vercel.app/)
+
+> Você pode navegar pela interface, simular adição de produtos ao carrinho, calcular subtotais e testar os filtros de estoque e busca em tempo real.
+
+---
+
 ## 🎬 Demonstração
 
 | Cadastro de produtos | Movimentação de estoque | Venda no PDV |
