@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from './api';
 import './App.css';
 import PdvView from './PdvView';
 
@@ -33,14 +33,13 @@ function App() {
   const [erroAjuste, setErroAjuste] = useState('');
   const [enviandoAjuste, setEnviandoAjuste] = useState(false);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
-  const API_PRODUTOS_URL = `${API_BASE_URL}/api/produtos`;
-  const API_MOVIMENTACOES_URL = `${API_BASE_URL}/api/movimentacoes`;
+  const API_PRODUTOS_URL = '/api/produtos';
+  const API_MOVIMENTACOES_URL = '/api/movimentacoes';
 
   // Função para carregar os produtos do Spring Boot
   const carregarProdutos = async () => {
     try {
-      const resposta = await axios.get(API_PRODUTOS_URL);
+      const resposta = await api.get(API_PRODUTOS_URL);
       setProdutos(Array.isArray(resposta.data) ? resposta.data : []);
     } catch (erro) {
       console.error("Erro ao carregar produtos:", erro);
@@ -56,7 +55,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(API_PRODUTOS_URL, {
+      await api.post(API_PRODUTOS_URL, {
         nome,
         categoria,
         preco: parseFloat(preco),
@@ -106,7 +105,7 @@ function App() {
 
     setEnviandoMovimentacao(true);
     try {
-      await axios.post(API_MOVIMENTACOES_URL, {
+      await api.post(API_MOVIMENTACOES_URL, {
         produtoId: produtoSelecionado.id,
         tipo: tipoMovimentacao,
         quantidade: qtd,
@@ -153,7 +152,7 @@ function App() {
     setEnviandoAjuste(true);
     setErroAjuste('');
     try {
-      await axios.post(API_MOVIMENTACOES_URL, {
+      await api.post(API_MOVIMENTACOES_URL, {
         produtoId: produtoAjuste.id,
         tipo: diferencaAjuste < 0 ? 'SAIDA_AVARIA' : 'ENTRADA_REPOSICAO',
         quantidade: Math.abs(diferencaAjuste),
@@ -177,7 +176,7 @@ function App() {
   const deletarProduto = async (id) => {
     if (!window.confirm("Tem certeza que deseja excluir este produto?")) return;
     try {
-      await axios.delete(`${API_PRODUTOS_URL}/${id}`);
+      await api.delete(`${API_PRODUTOS_URL}/${id}`);
       carregarProdutos();
     } catch (erro) {
       console.error("Erro ao deletar produto:", erro);

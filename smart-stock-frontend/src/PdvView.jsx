@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from './api';
 
 const CENTAVOS_POR_REAL = 100;
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
-const API_VENDAS_URL = `${API_BASE_URL}/api/vendas`;
+const API_VENDAS_URL = '/api/vendas';
 
 // Converte o preço para centavos inteiros e evita erros de ponto flutuante na soma
 const precoEmCentavos = (preco) => Math.round(Number(preco ?? 0) * CENTAVOS_POR_REAL);
@@ -114,7 +113,7 @@ function PdvView({ produtos, onVendaConcluida }) {
     };
 
     try {
-      const resposta = await axios.post(API_VENDAS_URL, payload);
+      const resposta = await api.post(API_VENDAS_URL, payload);
       const venda = resposta.data;
       const idVenda = venda?.id ? ` #${venda.id}` : '';
       setMensagemSucesso(`Venda${idVenda} finalizada com sucesso!`);
