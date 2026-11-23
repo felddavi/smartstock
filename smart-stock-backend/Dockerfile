@@ -1,5 +1,5 @@
-# Estágio 1: Build com Maven Wrapper e JDK 21 (Alpine)
-FROM eclipse-temurin:21-jdk-alpine AS build
+# Estágio 1: Build com Maven Wrapper e JDK 21 (Noble)
+FROM eclipse-temurin:21-jdk-noble AS build
 WORKDIR /app
 
 # Cache de dependências antes de copiar o código-fonte
