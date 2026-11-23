@@ -6,9 +6,23 @@
 [![Java](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Testes Automatizados](https://img.shields.io/badge/Testes-55_Passando-success?style=for-the-badge&logo=junit5)](https://github.com/)
+[![Testes Automatizados](https://img.shields.io/badge/Testes-JUnit_5_%26_Mockito-success?style=for-the-badge&logo=junit5)](https://github.com/)
 
-Sistema full-stack para **Gestão de Estoque e Frente de Caixa (PDV)** voltado ao varejo, com controle de saldo em tempo real, ajustes de inventário, alertas de ruptura e vendas atômicas com histórico auditável de movimentações.
+> Gestão de estoque e frente de caixa (PDV) para o varejo, em uma única aplicação web.
+
+O Smart Stock reúne o cadastro de produtos, o controle de saldo e a venda no balcão em um só lugar.
+Cada venda, reposição ou ajuste atualiza o estoque na hora e deixa um registro auditável,
+que pode ser consultado com filtros e exportado em PDF.
+
+**Destaques**
+
+- **Venda atômica:** a venda baixa o estoque, congela o preço de cada item e registra as movimentações
+  em uma única transação. Se um item falhar, nada é gravado.
+- **Alertas de ruptura:** o painel inicial destaca os produtos no limite do estoque mínimo ou esgotados.
+- **Histórico auditável:** toda alteração de saldo gera uma movimentação, filtrável por tipo e exportável em PDF.
+- **Ajuste de inventário:** a contagem física é comparada com o saldo do sistema, e a diferença vira uma
+  movimentação compensatória.
+- **Pronto para Docker:** MySQL, API e frontend sobem juntos com um único comando.
 
 ---
 
@@ -24,9 +38,11 @@ A aplicação está disponível e hospedada publicamente:
 
 ## 🎬 Demonstração
 
-|                            Cadastro de produtos                            |                              Movimentação de estoque                              |                          Venda no PDV                           |
-| :------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: | :-------------------------------------------------------------: |
-| <img src="docs/img/cadastro.gif" alt="Cadastro de produtos" width="280" /> | <img src="docs/img/movimentacao.gif" alt="Movimentação de estoque" width="280" /> | <img src="docs/img/venda.gif" alt="Venda no PDV" width="280" /> |
+|                                Tela Início                                |                              Tela Produtos                              |
+| :-----------------------------------------------------------------------: | :---------------------------------------------------------------------: |
+|    <img src="docs/img/TelaInicio.png" alt="Tela Início" width="420" />    | <img src="docs/img/TelaProdutos.png" alt="Tela Produtos" width="420" /> |
+|                            **Tela Histórico**                             |                           **Tela Caixa PDV**                            |
+| <img src="docs/img/TelaHistorico.png" alt="Tela Histórico" width="420" /> |  <img src="docs/img/TelaCaixa.png" alt="Tela Caixa PDV" width="420" />  |
 
 ---
 
@@ -45,6 +61,8 @@ A aplicação está disponível e hospedada publicamente:
 - **Interface:** React 19
 - **Build Tool:** Vite
 - **Comunicação HTTP:** Axios
+- **Ícones:** `lucide-react`
+- **Exportação de Relatórios PDF:** `jspdf` & `jspdf-autotable`
 - **Qualidade de Código:** Oxlint
 
 ### Banco de Dados
@@ -82,7 +100,13 @@ smartstock/
     ├── Dockerfile              # Build multi-stage (Node 22 Alpine -> Nginx 1.27 Alpine)
     ├── nginx.conf              # Fallback SPA e proxy reverso de /api/ para backend:8080
     ├── .dockerignore
-    └── src/                    # Cliente HTTP (api.js), telas (Estoque e PdvView) e estilos
+    └── src/
+        ├── api.js              # Cliente Axios centralizado com baseURL relativa
+        ├── App.jsx             # Shell principal, estado global e modais
+        ├── App.css / index.css # Design System Cloud e estilos globais
+        ├── components/         # Topbar, Sidebar, ToastContainer, MovimentacaoModal e AjusteModal
+        ├── utils/              # Utilitários (estoqueStatus.js e mensagemErro.js)
+        └── views/              # Telas: InicioView, ProdutosView, HistoricoView e PdvView
 ```
 
 > O projeto foi desenvolvido com apoio de agentes de IA. A pasta `.agents/` guarda as regras e
@@ -113,6 +137,7 @@ Copy-Item .env.example .env
 ```
 
 > **Importante:**
+>
 > - **Não use `DB_USERNAME=root`**, pois a imagem oficial do MySQL 8.4 rejeita `MYSQL_USER=root` na inicialização (o `.env.example` já vem com `smartstock_user`).
 > - O arquivo `.env` já está listado no `.gitignore` e nunca deve ser commitado com senhas reais.
 
@@ -181,10 +206,10 @@ cd smart-stock-backend
 ./mvnw spring-boot:run
 ```
 
-A API estará em `http://localhost:8080`:
+Com o backend rodando localmente, a API e a documentação interativa ficam disponíveis em `http://localhost:8080`:
 
-- **Swagger UI:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-- **OpenAPI JSON:** [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- **Swagger UI:** `http://localhost:8080/swagger-ui.html`
+- **OpenAPI JSON:** `http://localhost:8080/v3/api-docs`
 
 #### 2. Frontend (`smart-stock-frontend`)
 
@@ -249,7 +274,7 @@ Documentação interativa completa em `/swagger-ui.html`. Resumo por recurso:
 
 ## 🧪 Testes e Qualidade de Código
 
-### Backend (55 Testes Automatizados)
+### Backend (Testes Automatizados)
 
 A suíte roda de forma autônoma e rápida com **H2 em memória**, sem precisar de MySQL:
 
@@ -263,6 +288,8 @@ cd smart-stock-backend
 ```
 
 ### Frontend (Lint & Build)
+
+O frontend ainda não possui suíte de testes automatizados; a validação é feita via lint (`oxlint`) e build de produção (`vite build`):
 
 ```bash
 cd smart-stock-frontend
@@ -284,20 +311,12 @@ A coleção está em `api-requests/SmartStock API/`:
 
 ## 🖥️ Módulos e Fluxo das Telas
 
-### 📦 Tela 1: Painel de Estoque
+Navegação via **Topbar fixa** (`SMARTSTOCK`) e **Sidebar recolhível** com feedback por Toast:
 
-- **Alertas de Ruptura:** destaque automático quando há itens no limite ou abaixo do estoque mínimo.
-- **Busca e Filtro Rápido:** localiza produtos por nome ou categoria e isola itens críticos.
-- **Cadastro e Listagem:** visão tabular de preços, saldos, status e ações de manutenção.
-- **Movimentações Manuais:** modal para reposição, avaria ou devolução.
-- **Ajuste de Inventário / Balanço:** conferência física que calcula a diferença contra o saldo do sistema e gera a movimentação compensatória.
-
-### 🛒 Tela 2: Caixa / PDV
-
-- **Catálogo Rápido:** busca instantânea que lista apenas produtos disponíveis.
-- **Carrinho Reativo:** controle de quantidade (`+` e `−`), subtotal com arredondamento seguro em centavos e remoção de itens.
-- **Travas de Saldo na Interface:** o botão `+` trava quando a quantidade atinge o saldo físico.
-- **Venda Atômica:** requisição única ao backend, que valida todos os itens, debita os estoques, gera a venda com preços congelados e cria as movimentações em uma única transação.
+- **Tela 1 — Início:** 4 KPIs em tempo real (total de produtos, valor estimado em estoque em centavos, itens críticos e saídas por avaria) e tabela de atenção rápida para produtos com `quantidade <= estoqueMinimo`.
+- **Tela 2 — Produtos:** filtros combinados (nome, categoria dinâmica e status `Normal`, `Estoque Baixo` ou `Esgotado`), **Drawer lateral** (`+ Novo Produto`) para cadastro e ações de movimentação, ajuste de inventário/balanço e exclusão.
+- **Tela 3 — Histórico:** auditoria das movimentações com filtros por direção (`Entradas`/`Saídas`), tipo e nome do produto, além de exportação em PDF (`jspdf` + `jspdf-autotable`) dos registros filtrados.
+- **Tela 4 — Caixa (PDV):** catálogo filtrável, carrinho com cálculo em centavos, trava de saldo no botão `+`, preço congelado no item e venda atômica (`POST /api/vendas`).
 
 ---
 
@@ -320,9 +339,16 @@ A coleção está em `api-requests/SmartStock API/`:
 - **Testes no Frontend:** Implementar suíte de testes de componentes com Vitest e React Testing Library.
 - **Testcontainers:** Executar suíte de integração avançada contra uma instância real de MySQL efêmero em Docker.
 - **CI/CD:** Automatizar a execução de lint, build e testes no GitHub Actions a cada commit.
+- **Otimização de Bundle (PDF sob demanda):** A biblioteca `jspdf` aumenta o tamanho do bundle inicial do frontend; um próximo passo é carregá-la sob demanda (dynamic `import()`) apenas quando o usuário exportar o relatório.
 
 ---
 
+## 👤 Autor
+
+**Davi Feldmann** · [LinkedIn](https://br.linkedin.com/in/felddavi) · [GitHub](https://github.com/felddavi)
+
+Feedbacks e sugestões são bem-vindos nas [issues](https://github.com/felddavi/smartstock/issues).
+
 ## 📄 Licença
 
-Distribuído sob a licença **MIT**. Veja o arquivo [`LICENSE`](LICENSE) para mais detalhes.
+Distribuído sob a licença [MIT](LICENSE). Copyright © 2026 Davi Feldmann.

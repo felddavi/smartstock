@@ -30,3 +30,7 @@ desktop.ini
 .env
 .env.local
 *.env.local
+
+# Logs de crash da JVM
+hs_err_pid*
+replay_pid*
