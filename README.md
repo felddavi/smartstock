@@ -1,12 +1,12 @@
 # 📦 Smart Stock
 
-[![Deploy na Vercel](https://img.shields.io/badge/Vercel-Deploy_Ativo-black?style=for-the-badge&logo=vercel)](https://smartstock-pdv.vercel.app/)
-[![Spring Boot](https://img.shields.io/badge/Spring_Boot_4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![REST API](https://img.shields.io/badge/REST_API-OpenAPI_3-0052CC?style=for-the-badge&logo=fastapi&logoColor=white)](https://swagger.io/)
-[![Java](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
-[![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Testes Automatizados](https://img.shields.io/badge/Testes-JUnit_5_%26_Mockito-success?style=for-the-badge&logo=junit5)](https://github.com/)
+[![Demo – Oracle Cloud](https://img.shields.io/badge/Demo-Oracle_Cloud-F80000?style=for-the-badge&logo=oracle&logoColor=white)](http://150.230.229.114/)
+[![Java 21](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![Spring Boot 4](https://img.shields.io/badge/Spring_Boot_4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![React 19](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![MySQL 8.4](https://img.shields.io/badge/MySQL_8.4-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Testes Automatizados](https://img.shields.io/badge/Testes-JUnit_5_%26_Mockito-success?style=for-the-badge&logo=junit5)](./smart-stock-backend/src/test)
 
 > Gestão de estoque e frente de caixa (PDV) para o varejo, em uma única aplicação web.
 
@@ -16,117 +16,58 @@ que pode ser consultado com filtros e exportado em PDF.
 
 **Destaques**
 
-- **Venda atômica:** a venda baixa o estoque, congela o preço de cada item e registra as movimentações
-  em uma única transação. Se um item falhar, nada é gravado.
+- **Venda atômica:** a venda baixa o estoque, congela o preço de cada item e registra as movimentações em uma única transação.
 - **Alertas de ruptura:** o painel inicial destaca os produtos no limite do estoque mínimo ou esgotados.
 - **Histórico auditável:** toda alteração de saldo gera uma movimentação, filtrável por tipo e exportável em PDF.
-- **Ajuste de inventário:** a contagem física é comparada com o saldo do sistema, e a diferença vira uma
-  movimentação compensatória.
-- **Pronto para Docker:** MySQL, API e frontend sobem juntos com um único comando.
+- **Ajuste de inventário:** a contagem física é comparada com o saldo do sistema, e a diferença vira uma movimentação compensatória.
 
 ---
 
-## 🌐 Demonstração Online
+## 🌐 Demonstração
 
-A aplicação está disponível e hospedada publicamente:
+- **Aplicação em execução (VM Oracle Cloud ARM64):** [http://150.230.229.114/](http://150.230.229.114/)
 
-- **Frontend (PDV & Gestão de Estoque):** [https://smartstock-pdv.vercel.app/](https://smartstock-pdv.vercel.app/)
+> **Aviso:** ambiente público de demonstração servido por HTTP e sem autenticação. Não insira dados reais ou sensíveis — os registros são compartilhados e podem ser alterados ou apagados a qualquer momento.
 
-> Você pode navegar pela interface, simular adição de produtos ao carrinho, calcular subtotais e testar os filtros de estoque e busca em tempo real.
-
----
-
-## 🎬 Demonstração
-
-|                                Tela Início                                |                              Tela Produtos                              |
-| :-----------------------------------------------------------------------: | :---------------------------------------------------------------------: |
-|    <img src="docs/img/TelaInicio.png" alt="Tela Início" width="420" />    | <img src="docs/img/TelaProdutos.png" alt="Tela Produtos" width="420" /> |
-|                            **Tela Histórico**                             |                           **Tela Caixa PDV**                            |
-| <img src="docs/img/TelaHistorico.png" alt="Tela Histórico" width="420" /> |  <img src="docs/img/TelaCaixa.png" alt="Tela Caixa PDV" width="420" />  |
+| **Início** | **Produtos** |
+| :---: | :---: |
+| <img src="docs/img/TelaInicio.png" alt="Tela Início" width="420" /> | <img src="docs/img/TelaProdutos.png" alt="Tela Produtos" width="420" /> |
+| 4 KPIs em tempo real (produtos, valor em estoque, itens críticos e avarias) e atenção rápida. | Filtros combinados (nome, categoria e status), Drawer lateral de cadastro e ajuste/balanço. |
+| **Histórico** | **Caixa (PDV)** |
+| <img src="docs/img/TelaHistorico.png" alt="Tela Histórico" width="420" /> | <img src="docs/img/TelaCaixa.png" alt="Tela Caixa PDV" width="420" /> |
+| Auditoria de entradas e saídas por direção, tipo e produto, com exportação em PDF. | Busca instantânea, carrinho em centavos com trava de saldo físico e venda atômica. |
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🏗️ Arquitetura
 
-### Backend
-
-- **Linguagem & Framework:** Java 21 & Spring Boot 4.1.1
-- **Acesso a Dados:** Spring Data JPA & Hibernate
-- **Validação:** Jakarta Bean Validation (`@Valid`, constraints nos DTOs)
-- **Documentação da API:** SpringDoc OpenAPI 3 / Swagger UI
-- **Build & Dependências:** Apache Maven Wrapper (`mvnw`)
-
-### Frontend
-
-- **Interface:** React 19
-- **Build Tool:** Vite
-- **Comunicação HTTP:** Axios
-- **Ícones:** `lucide-react`
-- **Exportação de Relatórios PDF:** `jspdf` & `jspdf-autotable`
-- **Qualidade de Código:** Oxlint
-
-### Banco de Dados
-
-- **Aplicação (desenvolvimento e deploy):** MySQL 8.4 (via Docker) / MySQL 8+ (local)
-- **Testes automatizados:** H2 em memória, isolado por perfil de teste
-
-### Containers & Proxy Reverso
-
-- **Orquestração:** Docker & Docker Compose (`mysql`, `backend` e `frontend`)
-- **Imagens Multi-stage:** Eclipse Temurin 21 (JDK no build / JRE Alpine no runtime) e Node 22 Alpine
-- **Servidor Web & Proxy:** Nginx 1.27 Alpine (build estático da SPA + proxy reverso `/api/`)
-
----
-
-## 📁 Estrutura do Repositório
-
-```text
-smartstock/
-├── .agents/                    # Diretrizes e skills usadas pelos agentes de IA no desenvolvimento
-├── .env.example                # Modelo de variáveis de ambiente para o Docker Compose
-├── docker-compose.yml          # Orquestração dos serviços (MySQL 8.4, Backend e Frontend/Nginx)
-├── api-requests/               # Coleção de requisições prontas para o Bruno (REST API)
-│   └── SmartStock API/
-│       ├── Movimentações/
-│       ├── Produtos/
-│       └── Vendas/
-├── docs/                       # Documentação de arquitetura, requisitos e mídias (docs/img)
-├── smart-stock-backend/        # API REST Spring Boot (Java 21)
-│   ├── Dockerfile              # Build multi-stage (JDK 21 -> JRE 21 Alpine, usuário não-root)
-│   ├── .dockerignore
-│   ├── src/main/java/          # Controllers, Services, DTOs, Entidades e Repositories
-│   └── src/test/java/          # Testes unitários, de controller e de integração
-└── smart-stock-frontend/       # Aplicação SPA React (Vite)
-    ├── Dockerfile              # Build multi-stage (Node 22 Alpine -> Nginx 1.27 Alpine)
-    ├── nginx.conf              # Fallback SPA e proxy reverso de /api/ para backend:8080
-    ├── .dockerignore
-    └── src/
-        ├── api.js              # Cliente Axios centralizado com baseURL relativa
-        ├── App.jsx             # Shell principal, estado global e modais
-        ├── App.css / index.css # Design System Cloud e estilos globais
-        ├── components/         # Topbar, Sidebar, ToastContainer, MovimentacaoModal e AjusteModal
-        ├── utils/              # Utilitários (estoqueStatus.js e mensagemErro.js)
-        └── views/              # Telas: InicioView, ProdutosView, HistoricoView e PdvView
+```mermaid
+flowchart LR
+    Browser["Navegador do Usuário"] -->|"HTTP :80 (única porta publicada)"| Nginx["Frontend: Nginx 1.27 Alpine<br/>(SPA React + Proxy /api/)"]
+    subgraph Rede Interna do Docker Compose
+        Nginx -->|"http://backend:8080/api/*"| Backend["Backend: Spring Boot 4 / JRE 21<br/>(usuário não-root)"]
+        Backend -->|"TCP mysql:3306"| MySQL[("MySQL 8.4<br/>Volume: mysql_data")]
+    end
 ```
 
-> O projeto foi desenvolvido com apoio de agentes de IA. A pasta `.agents/` guarda as regras e
-> skills que orientam esse fluxo. Toda alteração é validada com testes e revisão manual.
+| Camada | Tecnologias |
+| :--- | :--- |
+| **Frontend** | React 19, Vite, Axios, `lucide-react`, `jspdf` & `jspdf-autotable`, Oxlint |
+| **Backend** | Java 21, Spring Boot 4.1.1, Spring Data JPA / Hibernate, Jakarta Validation, SpringDoc OpenAPI 3, Maven Wrapper (`mvnw`) |
+| **Banco de Dados** | MySQL 8.4 (aplicação e deploy) · H2 em memória (exclusivo para testes automatizados) |
+| **Containers & Proxy** | Docker Compose, builds multi-stage (`eclipse-temurin:21-jdk-noble` → `21-jre-alpine`; `node:22-alpine` → `nginx:1.27-alpine`) |
+
+O frontend centraliza as chamadas HTTP em `src/api.js` usando caminho relativo (`/api/...`), o que elimina URLs fixas no bundle e a necessidade de CORS: em produção/Docker o Nginx encaminha `/api/` para `http://backend:8080`, e no desenvolvimento local (`npm run dev`) o proxy do Vite desempenha o mesmo papel.
 
 ---
 
-## 🚀 Como Executar o Projeto
+## 🚀 Executar com Docker
 
-### Executar com Docker (Recomendado)
+### Execução local
 
-A forma mais rápida de subir toda a stack (**MySQL 8.4 + Backend + Frontend/Nginx**) com um único comando.
+**Pré-requisitos:** Docker com Compose (`Docker Desktop` ou `Docker Engine` + plugin `docker compose`).
 
-#### Pré-requisitos
-
-- **Docker Desktop** (com **Docker Compose** habilitado).
-
-#### 1. Configure as variáveis de ambiente
-
-Na raiz do projeto, copie o arquivo de exemplo para criar o seu `.env`:
+1. **Crie o arquivo `.env` a partir do modelo:**
 
 ```bash
 # Linux / macOS (Bash):
@@ -136,210 +77,185 @@ cp .env.example .env
 Copy-Item .env.example .env
 ```
 
-> **Importante:**
->
-> - **Não use `DB_USERNAME=root`**, pois a imagem oficial do MySQL 8.4 rejeita `MYSQL_USER=root` na inicialização (o `.env.example` já vem com `smartstock_user`).
-> - O arquivo `.env` já está listado no `.gitignore` e nunca deve ser commitado com senhas reais.
+> **Importante:** não use `DB_USERNAME=root` (a imagem oficial `mysql:8.4` rejeita `MYSQL_USER=root` na inicialização; o modelo já define `smartstock_user`). O `.env` está no `.gitignore` e nunca deve ser commitado.
 
-#### 2. Suba os containers
+2. **Construa e suba os serviços:**
 
 ```bash
 docker compose up --build -d
 ```
 
-O Compose inicia o MySQL com healthcheck, aguarda o banco ficar saudável para subir o backend Spring Boot e publica apenas o frontend Nginx no host.
+O Compose aguarda o `mysql` ficar saudável (`service_healthy`), inicia o `backend` na rede interna e publica apenas o `frontend` (Nginx).
 
-#### 3. Acesse a aplicação
+3. **Acesse e gerencie o ambiente:**
 
-- **Aplicação Web (PDV & Estoque):** [http://localhost](http://localhost) (ou `http://localhost:<FRONTEND_PORT>`, caso altere `FRONTEND_PORT` no `.env`).
-
-#### 4. Parar ou limpar o ambiente
+- **URL:** [http://localhost](http://localhost) (ou `http://localhost:<FRONTEND_PORT>`, se alterada no `.env`).
 
 ```bash
-# Parar e remover os containers mantendo os dados do banco (volume preservado):
+# Parar os containers preservando os dados do MySQL:
 docker compose down
 
-# Parar, remover os containers e apagar também os volumes/dados do MySQL:
+# Parar os containers e remover também o volume de dados (mysql_data):
 docker compose down -v
 ```
 
----
+### Deploy em VM Linux (exemplo: Oracle Cloud, ARM64)
 
-### Executar Localmente (sem Docker)
-
-#### Pré-requisitos
-
-- **Java 21** instalado e configurado no `PATH`.
-- **Node.js 20+** e **npm** instalados.
-- **MySQL 8+** ativo localmente na porta padrão `3306`.
-
-#### 1. Backend (`smart-stock-backend`)
-
-##### Variáveis de ambiente
-
-O backend conecta-se ao MySQL usando `DB_USERNAME` e `DB_PASSWORD`.
-
-**Windows (PowerShell):**
-
-```powershell
-$env:DB_USERNAME = "root"
-$env:DB_PASSWORD = "sua_senha_aqui"
-```
-
-**Linux / macOS (Bash):**
+Todas as imagens base utilizadas nos Dockerfiles e no `docker-compose.yml` suportam `linux/arm64` e `linux/amd64`. Em uma instância Ubuntu 24.04 (`aarch64`):
 
 ```bash
-export DB_USERNAME="root"
-export DB_PASSWORD="sua_senha_aqui"
+# 1. Instalar Docker Engine + plugin Compose (repositório oficial) e clonar o projeto
+git clone https://github.com/felddavi/smartstock.git
+cd smartstock
+
+# 2. Criar o .env e definir senhas fortes (ex.: gerar hashes com openssl rand -base64 24)
+cp .env.example .env
+nano .env
+
+# 3. Subir a stack em background e validar saúde dos serviços
+docker compose up -d --build
+docker compose ps
+curl -I http://localhost
+
+# 4. Atualizar a aplicação após novos commits
+git pull && docker compose up -d --build
 ```
 
-> **Nota:** o banco `smartstock` é criado automaticamente caso não exista (`createDatabaseIfNotExist=true`).
-
-##### Executar
-
-```bash
-cd smart-stock-backend
-# Windows:
-.\mvnw.cmd spring-boot:run
-
-# Linux / macOS:
-./mvnw spring-boot:run
-```
-
-Com o backend rodando localmente, a API e a documentação interativa ficam disponíveis em `http://localhost:8080`:
-
-- **Swagger UI:** `http://localhost:8080/swagger-ui.html`
-- **OpenAPI JSON:** `http://localhost:8080/v3/api-docs`
-
-#### 2. Frontend (`smart-stock-frontend`)
-
-```bash
-cd smart-stock-frontend
-npm install
-npm run dev
-```
-
-A aplicação abre em `http://localhost:5173`.
-
-### Endereço da API e Proxy
-
-O frontend centraliza o cliente HTTP em `smart-stock-frontend/src/api.js` e faz todas as chamadas por **caminho relativo (`/api/...`)**, eliminando URLs fixas e problemas de CORS:
-
-- **No Docker:** o **Nginx** (`smart-stock-frontend/nginx.conf`) serve o build estático do React e faz proxy reverso de `/api/` para o container `http://backend:8080`, mantendo o MySQL e o backend isolados na rede interna (sem portas expostas no host).
-- **No desenvolvimento local (`npm run dev`):** o proxy configurado no **Vite** (`smart-stock-frontend/vite.config.js`) encaminha automaticamente as requisições `/api` para `http://localhost:8080`.
+> **Rede e segurança na VM:** libere apenas a porta `80/TCP` nas regras de entrada do provedor (Security List / Network Security Group) e no firewall do sistema. **Não** publique as portas `8080` (backend) nem `3306` (MySQL).
 
 ---
 
-## 🔌 Endpoints da API
+## 🔌 API e Testes de Requisição
 
-Documentação interativa completa em `/swagger-ui.html`. Resumo por recurso:
+<details>
+<summary><strong>Ver endpoints REST, Swagger UI e coleção do Bruno</strong></summary>
 
-<details open>
-<summary><strong>📦 Produtos</strong> — <code>/api/produtos</code></summary>
+<br/>
 
-|  Método  | Rota                         | Descrição                              |
-| :------: | :--------------------------- | :------------------------------------- |
-|  `GET`   | `/api/produtos`              | Lista todos os produtos                |
-|  `GET`   | `/api/produtos/{id}`         | Busca um produto pelo ID               |
-|  `POST`  | `/api/produtos`              | Cadastra um novo produto               |
-|  `PUT`   | `/api/produtos/{id}`         | Atualiza os dados de um produto        |
-| `PATCH`  | `/api/produtos/{id}/estoque` | Atualiza o saldo de estoque do produto |
-| `DELETE` | `/api/produtos/{id}`         | Exclui um produto                      |
+#### 📦 Produtos — `/api/produtos`
 
-</details>
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `GET` | `/api/produtos` | Lista todos os produtos |
+| `GET` | `/api/produtos/{id}` | Busca um produto pelo ID |
+| `POST` | `/api/produtos` | Cadastra um novo produto |
+| `PUT` | `/api/produtos/{id}` | Atualiza os dados de um produto |
+| `PATCH` | `/api/produtos/{id}/estoque` | Atualiza o saldo de estoque do produto |
+| `DELETE` | `/api/produtos/{id}` | Exclui um produto |
 
-<details open>
-<summary><strong>🔄 Movimentações</strong> — <code>/api/movimentacoes</code></summary>
+#### 🔄 Movimentações — `/api/movimentacoes`
 
-| Método | Rota                                     | Descrição                                                           |
-| :----: | :--------------------------------------- | :------------------------------------------------------------------ |
-| `GET`  | `/api/movimentacoes`                     | Lista o histórico de movimentações                                  |
-| `POST` | `/api/movimentacoes`                     | Registra uma movimentação (entrada, saída, avaria, devolução, etc.) |
-| `GET`  | `/api/movimentacoes/produto/{produtoId}` | Histórico de movimentações de um produto                            |
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `GET` | `/api/movimentacoes` | Lista o histórico de movimentações |
+| `POST` | `/api/movimentacoes` | Registra uma movimentação (reposição, devolução, venda ou avaria) |
+| `GET` | `/api/movimentacoes/produto/{produtoId}` | Lista o histórico de movimentações de um produto |
 
-</details>
+#### 🛒 Vendas — `/api/vendas`
 
-<details open>
-<summary><strong>🛒 Vendas</strong> — <code>/api/vendas</code></summary>
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `POST` | `/api/vendas` | Realiza uma venda atômica (valida itens, baixa estoque e gera movimentações) |
+| `GET` | `/api/vendas` | Lista todas as vendas |
+| `GET` | `/api/vendas/{id}` | Busca uma venda pelo ID, com seus itens |
 
-| Método | Rota               | Descrição                                                                    |
-| :----: | :----------------- | :--------------------------------------------------------------------------- |
-| `POST` | `/api/vendas`      | Realiza uma venda atômica (valida itens, baixa estoque e gera movimentações) |
-| `GET`  | `/api/vendas`      | Lista todas as vendas                                                        |
-| `GET`  | `/api/vendas/{id}` | Busca uma venda pelo ID, com seus itens                                      |
+#### Documentação OpenAPI e Coleção Bruno
+
+- **Swagger UI (execução local do backend):** `http://localhost:8080/swagger-ui.html` (especificação JSON em `/v3/api-docs`).
+- **Bruno:** abra o [Bruno](https://www.usebruno.com), escolha **Open Collection** e selecione a pasta `api-requests/SmartStock API` para testar as requisições prontas de **Produtos**, **Movimentações** e **Vendas**.
 
 </details>
 
 ---
 
-## 🧪 Testes e Qualidade de Código
+## 🧪 Testes e Qualidade
 
-### Backend (Testes Automatizados)
-
-A suíte roda de forma autônoma e rápida com **H2 em memória**, sem precisar de MySQL:
-
-- **Testes unitários de Service (JUnit 5 + Mockito):** regras de negócio, bloqueios de estoque, cálculo de totais e integridade das movimentações.
-- **Testes de Controller (`@WebMvcTest`):** payloads, status HTTP (200, 201, 400, 404) e contratos REST.
-- **Testes de integração (`@SpringBootTest` com H2):** transações `@Transactional` e rollback atômico em operações compostas de venda.
-
-```bash
-cd smart-stock-backend
-.\mvnw.cmd test
-```
-
-### Frontend (Lint & Build)
-
-O frontend ainda não possui suíte de testes automatizados; a validação é feita via lint (`oxlint`) e build de produção (`vite build`):
-
-```bash
-cd smart-stock-frontend
-npm run lint
-npm run build
-```
-
----
-
-## 📬 Testando a API via Bruno
-
-A coleção está em `api-requests/SmartStock API/`:
-
-1. Abra o [Bruno](https://www.usebruno.com) e escolha **Open Collection**.
-2. Selecione a pasta `api-requests/SmartStock API`.
-3. Use as pastas **Produtos**, **Movimentações** e **Vendas**.
-
----
-
-## 🖥️ Módulos e Fluxo das Telas
-
-Navegação via **Topbar fixa** (`SMARTSTOCK`) e **Sidebar recolhível** com feedback por Toast:
-
-- **Tela 1 — Início:** 4 KPIs em tempo real (total de produtos, valor estimado em estoque em centavos, itens críticos e saídas por avaria) e tabela de atenção rápida para produtos com `quantidade <= estoqueMinimo`.
-- **Tela 2 — Produtos:** filtros combinados (nome, categoria dinâmica e status `Normal`, `Estoque Baixo` ou `Esgotado`), **Drawer lateral** (`+ Novo Produto`) para cadastro e ações de movimentação, ajuste de inventário/balanço e exclusão.
-- **Tela 3 — Histórico:** auditoria das movimentações com filtros por direção (`Entradas`/`Saídas`), tipo e nome do produto, além de exportação em PDF (`jspdf` + `jspdf-autotable`) dos registros filtrados.
-- **Tela 4 — Caixa (PDV):** catálogo filtrável, carrinho com cálculo em centavos, trava de saldo no botão `+`, preço congelado no item e venda atômica (`POST /api/vendas`).
+- **Backend:** testes unitários de regras de negócio (`JUnit 5` + `Mockito`), testes de contratos REST nos controllers (`@WebMvcTest`) e testes de integração transacional (`@SpringBootTest` com H2 em memória, sem depender de MySQL ativo).
+  ```bash
+  cd smart-stock-backend && ./mvnw test   # No Windows: .\mvnw.cmd test
+  ```
+- **Frontend:** ainda não possui suíte de testes automatizados; a validação é feita com análise estática (`oxlint`) e build de produção (`vite build`).
+  ```bash
+  cd smart-stock-frontend && npm run lint && npm run build
+  ```
 
 ---
 
 ## 🧭 Decisões de Arquitetura
 
-- **Venda em um único endpoint atômico:** O frontend envia o carrinho inteiro em uma requisição, e o backend valida todos os itens _antes_ de alterar qualquer estado, dentro de uma transação. Assim, uma falha no meio nunca deixa o estoque baixado pela metade.
-- **Preço congelado no item da venda:** O valor unitário é copiado para o `ItemVenda` no momento da compra, garantindo que reajustes posteriores de preço no produto não alterem o histórico e balanço fiscal passado.
-- **Agrupamento de itens repetidos:** Se houver repetições de um mesmo produto no payload, as quantidades são consolidadas antes da validação de estoque, impedindo fraudes ou inconsistências de concorrência.
-- **Rastreabilidade total:** Toda alteração de saldo gera uma `Movimentacao`, garantindo auditoria completa (entradas, saídas, perdas e vendas).
-- **Regras no backend com UX reativa no frontend:** Travas visuais melhoram a experiência do operador, mas o backend é quem assegura a integridade das regras.
-- **Isolamento de DTOs na borda da API:** Entidades de persistência JPA não são expostas nas rotas REST, prevenindo vazamentos de estrutura e loops de serialização.
-- **H2 isolado para a suíte de testes:** Permite que qualquer desenvolvedor ou esteira de CI execute os testes em segundos sem exigir um container ou daemon de banco ativo.
+- **Venda em endpoint atômico:** o backend valida todos os itens do carrinho antes de alterar qualquer registro sob `@Transactional`; se um item falhar, toda a operação sofre rollback.
+- **Preço congelado no item da venda:** o valor unitário é copiado para `ItemVenda` no ato da compra, preservando os totais de vendas passadas mesmo após reajustes no produto.
+- **Agrupamento de itens repetidos:** quantidades de um mesmo produto enviadas em mais de uma linha são consolidadas antes da checagem, o que impede estourar o saldo dividindo o mesmo produto em várias linhas do carrinho.
+- **Rastreabilidade total:** toda alteração de saldo gera um registro em `Movimentacao` (reposição, devolução, avaria, balanço ou venda).
+- **Regras no backend com UX reativa no front:** cálculos em centavos e travas visuais guiam o operador, mas o backend é a autoridade final sobre saldos e validações.
+- **DTOs na borda da API:** entidades JPA não são expostas nas rotas REST, evitando acoplamento externo e loops de serialização.
+- **H2 apenas nos testes:** isola a suíte automatizada em memória para execução rápida em qualquer máquina.
 
 ---
 
 ## ⚠️ Limitações e Próximos Passos
 
-- **Autenticação e Autorização:** Hoje os endpoints estão públicos na rede local. O próximo passo é introduzir Spring Security com JWT e controle de permissões por perfil.
-- **Gerenciamento de Schema:** Migrar de `ddl-auto=update` para controle de migrações versionadas via **Flyway** e validação de schema (`ddl-auto=validate`).
-- **Testes no Frontend:** Implementar suíte de testes de componentes com Vitest e React Testing Library.
-- **Testcontainers:** Executar suíte de integração avançada contra uma instância real de MySQL efêmero em Docker.
-- **CI/CD:** Automatizar a execução de lint, build e testes no GitHub Actions a cada commit.
-- **Otimização de Bundle (PDF sob demanda):** A biblioteca `jspdf` aumenta o tamanho do bundle inicial do frontend; um próximo passo é carregá-la sob demanda (dynamic `import()`) apenas quando o usuário exportar o relatório.
+- **Autenticação e autorização:** a API não tem autenticação e a demo é pública; o próximo passo é adicionar Spring Security com JWT e controle de acesso por perfil.
+- **Domínio e HTTPS:** a demonstração atual responde via HTTP; o próximo passo é configurar domínio próprio e certificado TLS/HTTPS (Let's Encrypt).
+- **Dados de demonstração e reset:** criar carga inicial de dados de demonstração e rotina de reset periódico para a base pública.
+- **Migrações de banco:** substituir `ddl-auto=update` por migrações versionadas com **Flyway** (`ddl-auto=validate`).
+- **Testes automatizados e integração:** implementar testes de interface com **Vitest** + **React Testing Library** e testes de integração com **Testcontainers** (MySQL real).
+- **CI/CD e code splitting:** automatizar lint, testes e build no **GitHub Actions** e carregar `jspdf` sob demanda (`import()`) apenas ao exportar PDF.
+
+---
+
+## 🛠️ Desenvolvimento Local (sem Docker)
+
+<details>
+<summary><strong>Ver instruções para rodar localmente e estrutura de pastas</strong></summary>
+
+<br/>
+
+**Pré-requisitos:** Java 21 no `PATH`, Node.js 20+ com `npm` e MySQL 8+ ativo em `localhost:3306` (o schema `smartstock` é criado automaticamente via `createDatabaseIfNotExist=true`).
+
+**Windows (PowerShell):**
+
+```powershell
+# Terminal 1 — Backend (http://localhost:8080)
+$env:DB_USERNAME = "root"
+$env:DB_PASSWORD = "sua_senha_aqui"
+cd smart-stock-backend
+.\mvnw.cmd spring-boot:run
+
+# Terminal 2 — Frontend (http://localhost:5173, proxy /api -> localhost:8080)
+cd smart-stock-frontend
+npm install
+npm run dev
+```
+
+**Linux / macOS (Bash):**
+
+```bash
+# Terminal 1 — Backend (http://localhost:8080)
+export DB_USERNAME="root"
+export DB_PASSWORD="sua_senha_aqui"
+cd smart-stock-backend && ./mvnw spring-boot:run
+
+# Terminal 2 — Frontend (http://localhost:5173, proxy /api -> localhost:8080)
+cd smart-stock-frontend && npm install && npm run dev
+```
+
+**Estrutura principal do repositório:**
+
+```text
+smartstock/
+├── .agents/               # Regras e skills de desenvolvimento assistido por IA
+├── .env.example           # Variáveis de exemplo para o Docker Compose
+├── docker-compose.yml     # Orquestração de mysql, backend e frontend (Nginx)
+├── api-requests/          # Coleção de requisições REST para o Bruno
+├── docs/                  # Contexto arquitetural e capturas de tela (docs/img)
+├── smart-stock-backend/   # API REST Java 21 + Spring Boot 4 (Dockerfile incluso)
+└── smart-stock-frontend/  # SPA React 19 + Vite + Nginx (Dockerfile e nginx.conf inclusos)
+```
+
+O projeto foi desenvolvido com apoio de agentes de IA, cujas diretrizes e skills ficam versionadas em `.agents/`.
+
+</details>
 
 ---
 
